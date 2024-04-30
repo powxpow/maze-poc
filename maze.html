@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Maze Game (Proof of Concept)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      overflow: hidden; /* don't want to move the page with arrow keys */
+    }
+    canvas {
+      background: #eee;
+      display: inline-block;
+      margin: 2mm 0mm 0mm 2mm;
+    }
+
+    #feedback, #fb {
+       border: solid silver 0.5mm;
+       margin: 2mm;
+       font-variant-numeric: tabular-nums;
+    }
+
+    .game-container {
+      display: inline-block;
+      /* transform: scale(0.5) translateY(1%) */
+    }
+
+    .game-container canvas {
+      image-rendering: pixelated;
+    }
+  </style>
+  <link rel="stylesheet" href="./base_events.css">
+</head>
+<body>
+  <div class="game-container">
+    <canvas id="maze-player1" width="352" height="352"></canvas>
+   <div id="player1moveReq" class="👆👇👈👉">
+      <button class="move↑">↑</button>
+      <button class="move←">←</button>
+      <div class="spacer">wasd</div>
+      <button class="move→">→</button>
+      <button class="move↓">↓</button>
+    </div>
+  </div>
+  <div class="game-container">
+    <canvas id="maze-player2" width="352" height="352"></canvas>
+    <div id="player2moveReq" class="👆👇👈👉">
+          <button class="move↑">↑</button>
+          <button class="move←">←</button>
+          <div class="spacer">arrow</div>
+          <button class="move→">→</button>
+          <button class="move↓">↓</button>
+      </div>
+    </div>
+    <div id="fb">&nbsp;</div>
+    <button onclick="togglePause()">Pause</button>
+
+<script src="./base_events.js"></script>
+<script src="./base_gameloop.js"></script>
+<script src="./game_feedback.js"></script>
+<script src="./game_maze_draw.js"></script>
+<script src="./game_maze_maps.js"></script>
+<script src="./game_maze_player.js"></script>
+<script src="./game_maze.js"></script>
+<script src="./server_local_maze.js"></script>
+<script>
+    let maps = new MazeMaps()
+    let maze = maps.mazes[0];
+    let canvas1 = document.getElementById("maze-player1");
+    let canvas2 = document.getElementById("maze-player2");
+    let player1 = new MazePlayer(1, '#00b7eb', eventsP1, canvas1, maze)
+    let player2 = new MazePlayer(2, 'tan' , eventsP2, canvas2, maze)
+    let game = new GameMaze([player1, player2], maps)//new GameFeedback();
+    
+    window.addEventListener("DOMContentLoaded", () => { new GameLoop(game); });
+
+    function togglePause() {
+        game.active = !game.active;
+        let resp = game.active ? ' ' : 'Paused';
+        document.getElementById('fb').innerText = resp;
+    }
+</script>
+</body>
+</html>

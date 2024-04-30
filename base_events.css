@@ -1,0 +1,69 @@
+:root {
+    --grid-item-width: 1cm;
+    --grid-border-width: 0.2mm;
+}
+
+.👆👇👈👉  {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    max-width: calc(var(--grid-item-width) * 3 + 2.1mm);
+    grid-gap: 0.05mm; 
+    border: solid black calc(var(--grid-border-width) * 2);
+    background-color: gray;
+    border-radius: calc(var(--grid-item-width) * 2);
+    margin-left: 2mm;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+.👆👇👈👉  > div,
+.👆👇👈👉  > button {
+    outline: solid black var(--grid-border-width);
+    border-width: var(--grid-border-width);
+    border-style: solid;
+    border-color: white #222 #222 white;
+    background-color: silver;
+    height: var(--grid-item-width);
+    line-height: var(--grid-item-width);
+    width: var(--grid-item-width);
+    margin-bottom: var(--grid-border-width);
+    font-weight: bold;
+    font-size:18pt;
+    color: white;
+}
+
+.👆👇👈👉  > div.active,
+.👆👇👈👉  > button.active {
+    background-color: limegreen;
+    border-color: #8f8 green green #8f8;
+}
+
+.👆👇👈👉  > .move↑ {
+  text-align: center;
+  grid-column-start: 2;
+  border-radius: 4mm 4mm 0 0;
+}
+
+.👆👇👈👉  > .move↓ {
+    text-align: center;
+    grid-column-start: 2;
+    border-radius: 0 0 4mm 4mm;
+}
+
+.👆👇👈👉  > .move← {
+    grid-column-start: 1;
+    border-radius: 4mm 0 0 4mm;
+}
+
+.👆👇👈👉  > .move→ {
+    grid-column-start: 3;
+    text-align: right;
+    border-radius: 0 4mm 4mm 0;
+}
+
+.👆👇👈👉  > .spacer {
+    font-size: small;
+    text-align: center;
+    background-color:#444;
+    color: white;
+    border-color: silver black black silver;
+}
